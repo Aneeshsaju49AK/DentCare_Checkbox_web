@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox with Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .checkbox-list {
+            margin-bottom: 20px;
+        }
+        .checkbox-list label {
+            display: block;
+            margin: 5px 0;
+        }
+        .counter {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Checkbox with Counter</h1>
+        <div class="checkbox-list" id="checkbox-list">
+            <!-- Checkboxes will be added here by JavaScript -->
+        </div>
+        <div class="counter" id="counter">Selected Checkboxes: 0</div>
+    </div>
+
+    <script>
+        // JavaScript code to handle checkbox state and counter
+        document.addEventListener('DOMContentLoaded', () => {
+            const numCheckboxes = 16;
+            const checkboxList = document.getElementById('checkbox-list');
+            const counter = document.getElementById('counter');
+            let selectedCount = 0;
+
+            // Create checkboxes and append them to the checkbox list
+            for (let i = 0; i < numCheckboxes; i++) {
+                const checkboxId = `checkbox-${i}`;
+                const label = document.createElement('label');
+                label.innerHTML = `
+                    <input type="checkbox" id="${checkboxId}" />
+                    Checkbox ${i + 1}
+                `;
+                checkboxList.appendChild(label);
+
+                // Add event listener to each checkbox
+                document.getElementById(checkboxId).addEventListener('change', (event) => {
+                    if (event.target.checked) {
+                        selectedCount++;
+                    } else {
+                        selectedCount--;
+                    }
+                    counter.textContent = `Selected Checkboxes: ${selectedCount}`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
